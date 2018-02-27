@@ -23,7 +23,7 @@ public class ProcessHolder {
     // End Singleton Block
 
 
-    private Process process;
+    private Process process = null;
 
     private ProcessHolder() {
     }
@@ -35,7 +35,7 @@ public class ProcessHolder {
     }
 
     public void command(String cmd) {
-        if (! process.isAlive()) {
+        if (process == null || !process.isAlive()) {
             return;
         }
 
