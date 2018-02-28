@@ -12,6 +12,7 @@ import pocketminegui.io.ProcessHolder;
 import java.io.IOException;
 
 public class Controller {
+
     @FXML public Button bootButton;
     @FXML public ListView console;
     @FXML public TextField commandField;
@@ -31,5 +32,8 @@ public class Controller {
     public void commandEnterButtonClick(ActionEvent ev) {
         ProcessHolder ph = ProcessHolder.getInstrance();
         ph.command(commandField.getText() + "\n");
+        commandField.setText(null);
     }
+
+
 }
