@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import pocketminegui.io.ServerHandler;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,16 +21,19 @@ public class Main extends Application {
         File properties = new File("/_Developments/PocketMineGUI/server.properties");
 
         String serverName = null;
-        if(!properties.isFile()) {
-            serverName = "初回起動";
-        } else {
-            Properties sProperties = new Properties();
-            sProperties.load(new FileInputStream(properties));
-            serverName = sProperties.getProperty("motd");
-        }
+
+
         primaryStage.setTitle("Server: " + serverName);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+
+        ServerHandler.getInstance().start();
+
+    }
+
+    @Override
+    public void stop() throws Exception{
+
     }
 
 
