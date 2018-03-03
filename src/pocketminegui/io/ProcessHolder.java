@@ -39,13 +39,16 @@ public class ProcessHolder {
             return;
         }
 
-        try {
-            BufferedWriter writer = new BufferedWriter((new OutputStreamWriter(process.getOutputStream())));
-            writer.write(cmd);
-            writer.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+        new Thread(() -> {
+            try {
+                BufferedWriter writer = new BufferedWriter((new OutputStreamWriter(process.getOutputStream())));
+                writer.write(cmd);
+                writer.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     public void setOutput(ObservableList<String> output) {

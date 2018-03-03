@@ -1,6 +1,8 @@
 package pocketminegui.io;
 
+import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.net.*;
 
 public class ServerHandler {
@@ -76,10 +78,14 @@ class ConnectThread implements Runnable {
             ));
 
             System.out.println("接続待機中: Plugin側からの接続を待機してください");
-            ServerHandler.getInstance().socket = server.accept();
-
+            Socket socket = server.accept();
+            ServerHandler.getInstance().socket = socket;
             System.out.println("接続完了: Plugin側から接続されました!");
 
+            System.out.println("メッセージ送信テスト...");
+            BufferedWriter writer = (new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())));
+            writer.write("Welcome PocketMineGUI 1.0a!!!!");
+            writer.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
