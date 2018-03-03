@@ -10,7 +10,7 @@ import java.io.OutputStreamWriter;
 public class ProcessHolder {
 
     // Start Singleton
-    public static ProcessHolder instance = null;
+    private static ProcessHolder instance = null;
     private ObservableList<String> output;
 
     public static ProcessHolder getInstance() {
@@ -48,14 +48,14 @@ public class ProcessHolder {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        });
+        }).start();
     }
 
     public void setOutput(ObservableList<String> output) {
         this.output = output;
     }
 
-    public boolean isAlive() {
+    private boolean isAlive() {
         return  (process != null && process.isAlive());
     }
 

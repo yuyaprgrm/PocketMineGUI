@@ -23,10 +23,10 @@ public class ServerHandler {
 
     // Singleton block end
 
-    public Socket socket = null;
+    Socket socket = null;
     private ConnectThread thread = null;
 
-    public void asyncConnect() throws IOException {
+    private void asyncConnect() throws IOException {
         thread = new ConnectThread();
         new Thread(thread).start();
     }
@@ -37,7 +37,6 @@ public class ServerHandler {
         } catch (IOException e) {
             System.out.println("ソケットの開放に失敗。");
             System.out.println("port 20132のプロセスを停止してください。");
-            return;
         }
     }
 
@@ -57,7 +56,7 @@ public class ServerHandler {
         }
     }
 
-    public void connectMySelf() throws IOException {
+    private void connectMySelf() throws IOException {
         Socket soc = new Socket();
         soc.connect(new InetSocketAddress(InetAddress.getByName("localhost"), 20132));
     }
@@ -66,7 +65,7 @@ public class ServerHandler {
 
 class ConnectThread implements Runnable {
 
-    public ServerSocket server = null;
+    private ServerSocket server = null;
 
     @Override
     public void run() {
@@ -84,7 +83,7 @@ class ConnectThread implements Runnable {
 
             System.out.println("メッセージ送信テスト...");
             BufferedWriter writer = (new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())));
-            writer.write("Welcome PocketMineGUI 1.0a!!!!");
+            writer.write("Welcome PocketMineGUI 1.0a!!!!\n");
             writer.flush();
         } catch (IOException e) {
             e.printStackTrace();
