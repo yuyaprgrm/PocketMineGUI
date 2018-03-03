@@ -21,7 +21,7 @@ public class Controller {
         ObservableList<String> outputs = FXCollections.observableArrayList();
         console.setItems(outputs);
         try {
-            ProcessHolder ph = ProcessHolder.getInstrance();
+            ProcessHolder ph = ProcessHolder.getInstance();
             ph.setOutput(outputs);
             ph.start();
         } catch (IOException e) {
@@ -30,7 +30,7 @@ public class Controller {
     }
 
     public void commandEnterButtonClick(ActionEvent ev) {
-        ProcessHolder ph = ProcessHolder.getInstrance();
+        ProcessHolder ph = ProcessHolder.getInstance();
         ph.command(commandField.getText() + "\n");
         commandField.setText(null);
     }

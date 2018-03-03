@@ -13,7 +13,7 @@ public class ProcessHolder {
     public static ProcessHolder instance = null;
     private ObservableList<String> output;
 
-    public static ProcessHolder getInstrance() {
+    public static ProcessHolder getInstance() {
         if(instance == null) {
             instance = new ProcessHolder();
         }

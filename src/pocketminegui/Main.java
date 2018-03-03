@@ -9,9 +9,6 @@ import pocketminegui.io.ProcessHolder;
 import pocketminegui.io.ServerHandler;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.util.Properties;
-import java.util.ResourceBundle;
 
 public class Main extends Application {
 
@@ -35,7 +32,7 @@ public class Main extends Application {
     @Override
     public void stop() throws Exception{
         ServerHandler.getInstance().stop();
-        ProcessHolder.getInstrance().stop();
+        ProcessHolder.getInstance().stop();
     }
 
 
