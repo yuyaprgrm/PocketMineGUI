@@ -1,10 +1,7 @@
 package pocketminegui.io;
 
 import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.net.SocketAddress;
+import java.net.*;
 
 public class ServerHandler {
 
@@ -25,9 +22,11 @@ public class ServerHandler {
     // Singleton block end
 
     public Socket socket = null;
+    private ConnectThread thread = null;
 
     public void asyncConnect() throws IOException {
-        new Thread(new ConnectThread()).start();
+        thread = new ConnectThread();
+        new Thread(thread).start();
     }
 
     public void start() {
@@ -40,14 +39,37 @@ public class ServerHandler {
         }
     }
 
+     public void stop() {
+        if(socket == null) { // server.accept()時なら
+            try {
+                connectMySelf();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else { // 接続中なら
+            try {
+                socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void connectMySelf() throws IOException {
+        Socket soc = new Socket();
+        soc.connect(new InetSocketAddress(InetAddress.getByName("localhost"), 20132));
+    }
+
 }
 
 class ConnectThread implements Runnable {
 
+    public ServerSocket server = null;
+
     @Override
     public void run() {
         try{
-            ServerSocket server = new ServerSocket();
+            server = new ServerSocket();
             server.bind(new InetSocketAddress(
                     "127.0.0.1",
                     20132

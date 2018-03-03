@@ -35,7 +35,7 @@ public class ProcessHolder {
     }
 
     public void command(String cmd) {
-        if (process == null || !process.isAlive()) {
+        if(!isAlive()) {
             return;
         }
 
@@ -50,5 +50,15 @@ public class ProcessHolder {
 
     public void setOutput(ObservableList<String> output) {
         this.output = output;
+    }
+
+    public boolean isAlive() {
+        return  (process != null && process.isAlive());
+    }
+
+    public void stop() {
+        if(isAlive()){
+            process.destroy();
+        }
     }
 }
