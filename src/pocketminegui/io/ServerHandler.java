@@ -1,8 +1,6 @@
 package pocketminegui.io;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.net.*;
 
 public class ServerHandler {
@@ -41,7 +39,10 @@ public class ServerHandler {
     }
 
      public void stop() {
-        if(socket == null) { // server.accept()時なら
+        if(socket == null) { // socket接続してないとき
+            if(thread == null) {
+                return;
+            }
             try {
                 connectMySelf();
             } catch (IOException e) {
@@ -85,6 +86,9 @@ class ConnectThread implements Runnable {
             BufferedWriter writer = (new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())));
             writer.write("Welcome PocketMineGUI 1.0a!!!!\n");
             writer.flush();
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            System.out.println(reader.readLine());
         } catch (IOException e) {
             e.printStackTrace();
         }

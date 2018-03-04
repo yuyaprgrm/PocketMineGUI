@@ -9,6 +9,8 @@ import pocketminegui.io.ProcessHolder;
 import pocketminegui.io.ServerHandler;
 
 import java.io.File;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 
 public class Main extends Application {
 
@@ -20,12 +22,17 @@ public class Main extends Application {
 
         String serverName = null;
 
+        /*
+        try {
+            ResourceBundle bundle = ResourceBundle.getBundle();
+            serverName = bundle.getString("motd");
+        } catch (MissingResourceException e) {
+        }*/
 
         primaryStage.setTitle("Server: " + serverName);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
 
-        ServerHandler.getInstance().start();
 
     }
 

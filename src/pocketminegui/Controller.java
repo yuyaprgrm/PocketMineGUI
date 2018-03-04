@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import pocketminegui.io.ProcessHolder;
+import pocketminegui.io.ServerHandler;
 
 import java.io.IOException;
 
@@ -24,6 +25,7 @@ public class Controller {
             ProcessHolder ph = ProcessHolder.getInstance();
             ph.setOutput(outputs);
             ph.start();
+            ServerHandler.getInstance().start();
         } catch (IOException e) {
             e.printStackTrace();
         }
