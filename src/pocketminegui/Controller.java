@@ -17,15 +17,23 @@ public class Controller {
     @FXML public Button bootButton;
     @FXML public ListView console;
     @FXML public TextField commandField;
+    @FXML public ListView playerList;
+    @FXML public ListView pluginsList;
 
     public void bootButtonClick(ActionEvent ev) {
+        ObservableList<String> players = FXCollections.observableArrayList();
+        ObservableList<String> plugins = FXCollections.observableArrayList();
         ObservableList<String> outputs = FXCollections.observableArrayList();
+
+        pluginsList.setItems(plugins);
+        playerList.setItems(players);
         console.setItems(outputs);
+
         try {
             ProcessHolder ph = ProcessHolder.getInstance();
             ph.setOutput(outputs);
             ph.start();
-            ServerHandler.getInstance().start();
+            ServerHandler.getInstance().start(players, plugins);
         } catch (IOException e) {
             e.printStackTrace();
         }

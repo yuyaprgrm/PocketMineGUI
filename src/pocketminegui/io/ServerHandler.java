@@ -1,7 +1,18 @@
 package pocketminegui.io;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import pocketminegui.Controller;
+
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class ServerHandler {
 
@@ -24,18 +35,33 @@ public class ServerHandler {
     Socket socket = null;
     private ConnectThread thread = null;
 
+
+    ObservableList playerList = null;
+    ObservableList pluginsList = null;
+
     private void asyncConnect() throws IOException {
         thread = new ConnectThread();
         new Thread(thread).start();
     }
 
-    public void start() {
+    public void start(ObservableList players, ObservableList plugins) {
+        playerList = players;
+        pluginsList = plugins;
+
         try {
             asyncConnect();
         } catch (IOException e) {
             System.out.println("ソケットの開放に失敗。");
             System.out.println("port 20132のプロセスを停止してください。");
         }
+    }
+
+
+    public void runService() {
+        UpdateInfomationThread thread = new UpdateInfomationThread();
+        thread.playerList = playerList;
+        thread.pluginsList = pluginsList;
+        new Thread(thread).start();
     }
 
      public void stop() {
@@ -87,10 +113,63 @@ class ConnectThread implements Runnable {
             writer.write("Welcome PocketMineGUI 1.0a!!!!\n");
             writer.flush();
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            System.out.println(reader.readLine());
+            ServerHandler.getInstance().runService();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+}
+
+class UpdateInfomationThread implements Runnable {
+
+    ObservableList playerList;
+    ObservableList pluginsList;
+
+    @Override
+    public void run() {
+
+        ServerHandler handler = ServerHandler.getInstance();
+
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(handler.socket.getInputStream()));
+            while (!handler.socket.isClosed()) {
+
+//                System.out.println("HELLO");
+                String json = reader.readLine();
+
+                ObjectMapper mapper = new ObjectMapper();
+                JsonNode node = mapper.readTree(json);
+                String type = node.get("type").asText();
+
+                switch (type) {
+                    case "plugins":
+                        Platform.runLater(() -> {
+                            ArrayList<String> plugins = new ArrayList<>();
+
+                            for (Iterator<JsonNode> elements = node.get("data").elements(); elements.hasNext();) {
+                                plugins.add(elements.next().asText());
+                            }
+                            pluginsList.setAll(plugins);
+                        });
+                        break;
+
+                    case "players":
+                        Platform.runLater(() -> {
+                            ArrayList<String> players = new ArrayList<>();
+
+                            for (Iterator<JsonNode> elements = node.get("data").elements(); elements.hasNext();) {
+                                players.add(elements.next().asText());
+                            }
+                            playerList.setAll(players);
+                        });
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+
+
+
     }
 }
