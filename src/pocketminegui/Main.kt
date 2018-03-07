@@ -30,7 +30,7 @@ class Main : Application() {
         } catch (e: FileNotFoundException) {
         }
 
-        primaryStage.title += "Server: ${serverName}!!"
+//        primaryStage.title += "Server: ${serverName}!!"
         primaryStage.scene = Scene(root)
         primaryStage.show()
 
