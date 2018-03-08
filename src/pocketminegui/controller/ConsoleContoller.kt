@@ -8,5 +8,6 @@ class ConsoleController() {
 
     @FXML lateinit var console : ListView<String>
     @FXML lateinit var commandField : TextField
+
     
 }

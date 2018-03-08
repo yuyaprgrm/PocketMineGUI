@@ -15,7 +15,7 @@ import java.util.Properties
 
 class Main : Application() {
 
-    private val procHolder: ProcessHolder?
+    private val procHolder:ProcessHolder
 
     init {
         procHolder = ProcessHolder()
@@ -23,7 +23,7 @@ class Main : Application() {
 
     @Throws(Exception::class)
     override fun start(primaryStage: Stage) {
-        val root = FXMLLoader.load<Parent>(javaClass.getResource("fxml/console.fxml"))
+        val root = FXMLLoader.load<Parent>(javaClass.getResource("fxml/bashboard.fxml"))
         primaryStage.title = "PocketMineGUI"
         val propertiesFile = File("/_Developments/PocketMineGUI/server.properties")
 
