@@ -23,7 +23,7 @@ class Main : Application() {
 
     @Throws(Exception::class)
     override fun start(primaryStage: Stage) {
-        val root = FXMLLoader.load<Parent>(javaClass.getResource("fxml/bashboard.fxml"))
+        val root = FXMLLoader.load<Parent>(javaClass.getResource("fxml/dashboard.fxml"))
         primaryStage.title = "PocketMineGUI"
         val propertiesFile = File("/_Developments/PocketMineGUI/server.properties")
 
