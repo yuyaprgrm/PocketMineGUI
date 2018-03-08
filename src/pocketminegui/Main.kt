@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader
 import javafx.scene.Parent
 import javafx.scene.Scene
 import javafx.stage.Stage
+import pocketminegui.io.ProcessHolder
 
 import java.io.File
 import java.io.FileInputStream
@@ -13,6 +14,12 @@ import java.util.MissingResourceException
 import java.util.Properties
 
 class Main : Application() {
+
+    private val procHolder: ProcessHolder?
+
+    init {
+        procHolder = ProcessHolder()
+    }
 
     @Throws(Exception::class)
     override fun start(primaryStage: Stage) {
@@ -37,15 +44,17 @@ class Main : Application() {
         primaryStage.minWidth = primaryStage.width
         primaryStage.minHeight = primaryStage.height
 
-
     }
 
     @Throws(Exception::class)
     override fun stop() {
     }
 
-}
+    companion object {
+        @JvmStatic
+        fun main(args: Array<String>) {
+            Application.launch(Main::class.java)
+        }
+    }
 
-fun main(args: Array<String>) {
-    Application.launch(*args)
 }
