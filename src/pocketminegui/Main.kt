@@ -46,7 +46,7 @@ class Main : Application() {
 
     @Throws(Exception::class)
     override fun stop() {
-
+        ServerManagerHelper.getInstance().stop()
     }
 
     companion object {
