@@ -14,7 +14,6 @@ class DashboardController {
 
     @FXML
     fun clickStartButton(ev: ActionEvent) {
-        chatList.items = FXCollections.observableArrayList<String>()
-        model?.start(chatList.items)
+        model?.start()
     }
 }

@@ -23,7 +23,7 @@ class ConsoleThread(val procHolder: ProcessHolder) : Runnable {
             }
 
             Platform.runLater({
-                procHolder.output!!.addAll(text)
+                procHolder.output?.addAll(text)
             })
         }
     }
