@@ -5,7 +5,8 @@ import javafx.fxml.FXMLLoader
 import javafx.scene.Parent
 import javafx.scene.Scene
 import javafx.stage.Stage
-import pocketminegui.io.ProcessHolder
+import pocketminegui.controller.DashboardController
+import pocketminegui.model.ServerManagerHelper
 
 import java.io.File
 import java.io.FileInputStream
@@ -15,15 +16,11 @@ import java.util.Properties
 
 class Main : Application() {
 
-    private val procHolder:ProcessHolder
-
-    init {
-        procHolder = ProcessHolder()
-    }
 
     @Throws(Exception::class)
     override fun start(primaryStage: Stage) {
-        val root = FXMLLoader.load<Parent>(javaClass.getResource("fxml/dashboard.fxml"))
+        val loader = FXMLLoader(javaClass.getResource("fxml/dashboard.fxml"))
+        val root = loader.load<Parent>()
         primaryStage.title = "PocketMineGUI"
         val propertiesFile = File("/_Developments/PocketMineGUI/server.properties")
 
@@ -37,7 +34,8 @@ class Main : Application() {
         } catch (e: FileNotFoundException) {
         }
 
-//        primaryStage.title += "Server: ${serverName}!!"
+        loader.getController<DashboardController>().model = ServerManagerHelper.getInstance()
+
         primaryStage.scene = Scene(root)
         primaryStage.show()
 
@@ -48,6 +46,7 @@ class Main : Application() {
 
     @Throws(Exception::class)
     override fun stop() {
+
     }
 
     companion object {
