@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.StackedAreaChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pocketminegui.controller.DashboardController">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" text="New" />
+            <MenuItem mnemonicParsing="false" text="Open…" />
+            <Menu mnemonicParsing="false" text="Open Recent" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Close" />
+            <MenuItem mnemonicParsing="false" text="Save" />
+            <MenuItem mnemonicParsing="false" text="Save As…" />
+            <MenuItem mnemonicParsing="false" text="Revert" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Preferences…" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Quit" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Edit">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Undo" />
+            <MenuItem mnemonicParsing="false" text="Redo" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Cut" />
+            <MenuItem mnemonicParsing="false" text="Copy" />
+            <MenuItem mnemonicParsing="false" text="Paste" />
+            <MenuItem mnemonicParsing="false" text="Delete" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Select All" />
+            <MenuItem mnemonicParsing="false" text="Unselect All" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="420.0" prefWidth="692.0" VBox.vgrow="ALWAYS">
+      <children>
+        <Label alignment="CENTER" layoutX="55.0" layoutY="42.0" style="&#10;" text="PocketMineGUI Dashboard" textAlignment="CENTER" textFill="#373737" wrapText="false">
+          <font>
+            <Font size="36.0" />
+          </font>
+        </Label>
+            <ListView fx:id="chatList" layoutX="270.0" layoutY="359.0" prefHeight="179.0" prefWidth="605.0" />
+            <Label layoutX="551.0" layoutY="333.0" text="CHAT">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Button layoutX="55.0" layoutY="359.0" mnemonicParsing="false" onAction="#clickStartButton" prefHeight="34.0" prefWidth="175.0" text="Start the Server" />
+            <Button layoutX="55.0" layoutY="432.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="175.0" text="To Console" />
+            <Button layoutX="55.0" layoutY="504.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="175.0" text="Button" AnchorPane.topAnchor="504.0" />
+            <StackedAreaChart layoutX="55.0" layoutY="95.0" prefHeight="245.0" prefWidth="304.0" title="Online Players">
+              <xAxis>
+                <NumberAxis side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis side="LEFT" />
+              </yAxis>
+            </StackedAreaChart>
+            <Canvas fx:id="worldMap" height="200.0" layoutX="450.0" layoutY="118.0" width="380.0" />
+            <Label layoutX="623.0" layoutY="82.0" text="Map">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>
