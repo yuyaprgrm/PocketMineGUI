@@ -1,5 +1,6 @@
 package pocketminegui.thread
 
+import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.ObjectMapper
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -17,8 +18,12 @@ class ConnectionThread : Runnable {
         sock = server!!.accept()
         val reader = BufferedReader(InputStreamReader(sock!!.getInputStream()))
         while (true) {
-            val data: String? = reader.readLine() ?: return
+            val data: String = reader.readLine() ?: return
             var mapper = ObjectMapper()
+            val node = mapper.readTree(data)
+            val type = node.get("type").asText()
+
+//            when()
         }
     }
 

@@ -1,9 +1,7 @@
-package pocketminegui.io
+package pocketminegui.utils
 
-import javafx.collections.ObservableArray
 import javafx.collections.ObservableList
 import pocketminegui.thread.ConsoleThread
-import java.io.File
 import java.io.IOException
 
 open class ProcessHolder() {

@@ -16,11 +16,12 @@ import java.util.Properties
 
 class Main : Application() {
 
-
     @Throws(Exception::class)
     override fun start(primaryStage: Stage) {
-        val loader = FXMLLoader(javaClass.getResource("fxml/dashboard.fxml"))
+
+        val loader = FXMLLoader(javaClass.getResource("/pocketminegui/fxml/dashboardView.fxml"))
         val root = loader.load<Parent>()
+
         primaryStage.title = "PocketMineGUI"
         val propertiesFile = File("/_Developments/PocketMineGUI/server.properties")
 
@@ -34,10 +35,12 @@ class Main : Application() {
         } catch (e: FileNotFoundException) {
         }
 
-        loader.getController<DashboardController>().model = ServerManagerHelper.getInstance()
-
+        val controller = loader.getController<DashboardController>()
+        controller.model = ServerManagerHelper.getInstance()
+        controller.stage = primaryStage
         primaryStage.scene = Scene(root)
         primaryStage.show()
+
 
         primaryStage.minWidth = primaryStage.width
         primaryStage.minHeight = primaryStage.height

@@ -1,13 +1,14 @@
 package pocketminegui.thread
 
 import javafx.application.Platform
-import pocketminegui.io.ProcessHolder
+import pocketminegui.utils.ProcessHolder
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
 class ConsoleThread(val procHolder: ProcessHolder) : Runnable {
 
     val reader : BufferedReader
+
 
     init {
         val process = procHolder.process

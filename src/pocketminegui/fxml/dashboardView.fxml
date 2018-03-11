@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.StackedAreaChart?>
 <?import javafx.scene.control.Button?>
@@ -69,9 +68,9 @@
                </font>
             </Label>
             <Button layoutX="55.0" layoutY="359.0" mnemonicParsing="false" onAction="#clickStartButton" prefHeight="34.0" prefWidth="175.0" text="Start the Server" />
-            <Button layoutX="55.0" layoutY="432.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="175.0" text="To Console" />
-            <Button layoutX="55.0" layoutY="504.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="175.0" text="Button" AnchorPane.topAnchor="504.0" />
-            <StackedAreaChart layoutX="55.0" layoutY="95.0" prefHeight="245.0" prefWidth="304.0" title="Online Players">
+            <Button layoutX="55.0" layoutY="432.0" mnemonicParsing="false" onAction="#moveToConsoleView" prefHeight="34.0" prefWidth="175.0" text="Console" />
+            <Button layoutX="55.0" layoutY="504.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="175.0" text="Setting" AnchorPane.topAnchor="504.0" />
+            <StackedAreaChart fx:id="playerChart" layoutX="571.0" layoutY="95.0" prefHeight="245.0" prefWidth="304.0" title="Online Players">
               <xAxis>
                 <NumberAxis side="BOTTOM" />
               </xAxis>
@@ -79,13 +78,26 @@
                 <NumberAxis side="LEFT" />
               </yAxis>
             </StackedAreaChart>
-            <Canvas fx:id="worldMap" height="200.0" layoutX="450.0" layoutY="118.0" width="380.0" />
-            <Label layoutX="623.0" layoutY="82.0" text="Map">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
       </children>
     </AnchorPane>
+      <MenuBar>
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
   </children>
 </VBox>

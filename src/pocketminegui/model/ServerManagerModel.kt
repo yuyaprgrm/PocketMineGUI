@@ -1,12 +1,8 @@
 package pocketminegui.model
 
 import javafx.collections.ObservableList
-import javafx.scene.canvas.GraphicsContext
-import javafx.scene.paint.Color
-import pocketminegui.io.MapRenderer
-import pocketminegui.io.ProcessHolder
-import pocketminegui.io.ServerHolder
-import java.io.DataOutput
+import pocketminegui.utils.ProcessHolder
+import pocketminegui.utils.ServerHolder
 
 class ServerManagerModel {
 
